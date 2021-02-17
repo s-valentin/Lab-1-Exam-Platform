@@ -4,9 +4,8 @@ public class Professor {
 
     private Exam examen;
 
-    public void createExam()
-    {
-
+    public void createExam() {
+        examen.setSubject("LFAC");
     }
 
 

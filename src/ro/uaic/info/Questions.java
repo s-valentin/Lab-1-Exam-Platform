@@ -1,19 +1,22 @@
 package ro.uaic.info;
 
 
-
-public class Questions extends Exam {
+public class Questions extends Exam implements Useful {
     String title;
     QuestionType type;
-    int nbAnswers;
+    int nbRightAnswers;
+    int nbWrongAnswers;
+    int nbAllAnswers;
     int points;
     int pointsTaken;
-    String []rightAnswers = new String[10];
-    String wrongAnswers;
-    String allAnswers;
+    String[] rightAnswers = new String[10];
+    String[] wrongAnswers = new String[10];
+    String[] allAnswers = new String[20];
 
     public Questions() {
-        this.nbAnswers = 0;
+        this.nbRightAnswers = 0;
+        this.nbWrongAnswers = 0;
+        this.nbAllAnswers = 0;
     }
 
     public String getTitle() {
@@ -30,14 +33,6 @@ public class Questions extends Exam {
 
     public void setType(QuestionType type) {
         this.type = type;
-    }
-
-    public int getNbAnswers() {
-        return nbAnswers;
-    }
-
-    public void setNbAnswers(int nbQuestions) {
-        this.nbAnswers = nbQuestions;
     }
 
     public int getPoints() {
@@ -57,7 +52,35 @@ public class Questions extends Exam {
     }
 
     public void setRightAnswers(String rAnswer) {
-        rightAnswers[nbAnswers++] = rAnswer;
+        rightAnswers[nbRightAnswers++] = rAnswer;
+    }
+
+    public String[] getWrongAnswers() {
+        return wrongAnswers;
+    }
+
+    public void setWrongAnswers(String wAnswer) {
+        wrongAnswers[nbWrongAnswers++] = wAnswer;
+    }
+
+    public void createAllAnswers()
+    {
+        int i,j;
+        nbAllAnswers = nbWrongAnswers + nbRightAnswers;
+        for(i = 0; i < nbRightAnswers; i++)
+        {
+            allAnswers[i] = rightAnswers[i];
+        }
+        for(j = i; j < nbAllAnswers; j++)
+        {
+            allAnswers[j] = wrongAnswers[j-i];
+        }
+    }
+
+    @Override
+    public void print() {
+        for (int i = 0; i < nbAllAnswers; i++)
+            System.out.println(allAnswers[i]);
     }
 }
 

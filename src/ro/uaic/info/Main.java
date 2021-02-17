@@ -6,29 +6,37 @@ public class Main {
 
     public static void main(String[] args) {
 
-        /*Questions question = new Questions();
+        Questions question = new Questions();
 
         question.setTitle("Alabama");
-        question.setNbAnswers(5);
         question.setType(QuestionType.dropdown);
         question.setPoints(10);
 
         System.out.println(question.getTitle());
 
-        question.setRightAnswers("dog");
-
-        System.out.println(question.nbAnswers);
-         */
-
-
+        String raspuns = "";
+        System.out.println("Introduceti ");
         Scanner scanner = new Scanner(System.in);
-        /*String test = scanner.next();
+        raspuns = scanner.next();
+        while(!raspuns.equals("0"))
+        {
+            question.setRightAnswers(raspuns);
+            raspuns = scanner.next();
+        }
+
+        System.out.println(question.nbAllAnswers);
+
+        question.print();
+
+        /*
+        Scanner scanner = new Scanner(System.in);
+        String test = scanner.next();
         System.out.println(test);
         test = scanner.next();
         System.out.println(test);
         test = scanner.next();
         System.out.println(test);
-        */
+
         System.out.println("State your identity:");
         String input = scanner.next();
 
@@ -46,7 +54,7 @@ public class Main {
                 System.out.println("Bye bye!");
             }
         }
-
+        */
 
     }
 }
