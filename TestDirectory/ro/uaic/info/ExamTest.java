@@ -9,6 +9,18 @@ class ExamTest {
     private Exam exam = new Exam();
 
     @Test
+    public void setTitle(){
+        exam.setTitle("Midterm exam");
+        assertEquals("Midterm exam", exam.getTitle());
+    }
+
+    @Test
+    public void setSubject(){
+        exam.setSubject("English");
+        assertEquals("English", exam.getSubject());
+    }
+
+    @Test
     public void setTimeTest() {
         exam.setTime(60);
         assertEquals(60, exam.getTime());
@@ -36,12 +48,6 @@ class ExamTest {
     public void setGrade(){
         exam.setGrade(8);
         assertEquals(8, exam.getGrade());
-    }
-
-    @Test
-    public void setSubject(){
-        exam.setSubject("English");
-        assertEquals("English", exam.getSubject());
     }
 
 }

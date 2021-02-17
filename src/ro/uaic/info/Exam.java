@@ -2,13 +2,16 @@ package ro.uaic.info;
 
 public class Exam {
 
+    private String subject;
+    private String title;
     private int time;
     private int nbQuestions;
-    private int totalPoints;
     private int startPoints;
+    private int totalPoints;
     protected int grade;
-    private String subject;
     private Questions[] question;
+
+    public void setTitle(String string) { title = string; }
 
     public void setSubject(String string){
         subject = string;
@@ -35,6 +38,12 @@ public class Exam {
         grade = number;
     }
 
+    public String getTitle() { return title; }
+
+    public String getSubject(){
+        return subject;
+    }
+
     public int getTime() {
         return time;
     }
@@ -55,7 +64,5 @@ public class Exam {
         return grade;
     }
 
-    public String getSubject(){
-        return subject;
-    }
+
 }

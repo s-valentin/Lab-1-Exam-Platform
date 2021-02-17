@@ -29,24 +29,35 @@ public class Main {
         test = scanner.next();
         System.out.println(test);
         */
-        System.out.println("State your identity:");
-        String input = scanner.next();
+        String input;
 
-        for (int i = 0; i < 2; i++) {
-            if (input.equals("Professor")) {
-                System.out.println(input);
-                break;
-            } else if (input.equals("Student")) {
-                System.out.println(input);
-                break;
-            } else if (i == 0) {
-                System.out.println("Are you a student or a professor?");
-                input = scanner.next();
-            } else if (i == 1) {
-                System.out.println("Bye bye!");
+        int profCount = 0;
+        int studCount = 0;
+
+        Professor[] profs = new Professor[10];
+        Student[] students = new Student[10];
+
+        while (true) {
+            System.out.println("State your identity:");
+            input = scanner.next();
+            for (int i = 0; i < 2; i++) {
+                if (input.equals("Professor")) {
+                    profs[profCount] = new Professor();
+                    profs[profCount++].createExam();
+                    break;
+                } else if (input.equals("Student")) {
+                    System.out.println(input);
+                    students[studCount] = new Student();
+                    students[studCount++].chooseExam("OOP");
+                    break;
+                } else if (i == 0) {
+                    System.out.println("Are you a student or a professor?");
+                    input = scanner.next();
+                } else if (i == 1) {
+                    System.out.println("Bye bye!");
+                }
             }
         }
-
 
     }
 }
