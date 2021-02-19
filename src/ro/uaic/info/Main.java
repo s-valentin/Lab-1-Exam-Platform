@@ -1,71 +1,83 @@
 package ro.uaic.info;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Questions question = new Questions();
 
-        question.setTitle("Alabama");
-        question.setType(QuestionType.dropdown);
-        question.setPoints(10);
-
-        System.out.println(question.getTitle());
-
-        String raspuns = "";
-        System.out.println("Introduceti ");
         Scanner scanner = new Scanner(System.in);
-        raspuns = scanner.next();
-        while(!raspuns.equals("0"))
-        {
-            question.setRightAnswers(raspuns);
-            raspuns = scanner.next();
-        }
+        ArrayList<Exam> exams = new ArrayList<>();
 
-        System.out.println(question.nbAllAnswers);
-
-        question.print();
-
-        /*
-        Scanner scanner = new Scanner(System.in);
-        String test = scanner.next();
-        System.out.println(test);
-        test = scanner.next();
-        System.out.println(test);
-        test = scanner.next();
-        System.out.println(test);
-        */
         String input;
 
         int profCount = 0;
         int studCount = 0;
 
-        Professor[] profs = new Professor[10];
-        Student[] students = new Student[10];
+        ArrayList<Professor> profs = new ArrayList<>();
+        ArrayList<Student> students = new ArrayList<>();
 
-        while (true) {
+        while (true) { // bucla infinita, nu avem de ce sa ne oprim.
             System.out.println("State your identity:");
             input = scanner.next();
-            for (int i = 0; i < 2; i++) {
-                if (input.equals("Professor")) {
-                    profs[profCount] = new Professor();
-                    profs[profCount++].createExam();
-                    break;
-                } else if (input.equals("Student")) {
-                    System.out.println(input);
-                    students[studCount] = new Student();
-                    students[studCount++].chooseExam("OOP");
-                    break;
-                } else if (i == 0) {
-                    System.out.println("Are you a student or a professor?");
+            if (input.equals("Professor")) {
+                profs.add(new Professor()); // am creat un profesor
+
+                System.out.println("State your name:");
+                input = scanner.next();
+                profs.get(profCount).setName(input); // am adaugat numele profesorului
+
+                System.out.println("What do you want to do?"); // create / remove
+                input = scanner.next();
+
+                if (input.equals("create")) { // ramura create
+                    exams.add(profs.get(profCount++).createExam()); //profesorul creeaza un examen
+                } else if (input.equals("delete")) { // ramura delete
+                    for (Exam exam : exams) {
+                        System.out.print(exam.getSubject() + " ");
+                    } // printam lista de examene pt ca profesorul sa aleaga ce obiect sterge
+
+                    System.out.println("\nInsert the exam subject from the above list.");
                     input = scanner.next();
-                } else if (i == 1) {
-                    System.out.println("Bye bye!");
+
+                    for (Exam exam : exams) {
+                        {
+                            if (input.equals(exam.getSubject()))
+                                exams.remove(exam); // a selectat din lista de examene obiectul pe care acum il stergem
+                            break;
+                        }
+                    }
+
                 }
+            } else if (input.equals("Student")) {
+                students.add(new Student()); // am creat un student
+
+                System.out.println("State your name: ");
+                input = scanner.next();
+                students.get(studCount).setName(input); // am adaugat numele studentului
+
+                System.out.println("Exam List:");
+
+                for (Exam exam : exams) {
+                    System.out.print(exam.getSubject() + " ");
+                } // printam lista de examene pt ca studentul sa aleaga unul.
+
+                System.out.println("\nInsert the exam subject from the above list.");
+                input = scanner.next(); // studentul alege un examen din lista de mai sus
+
+                for (Exam exam : exams) {
+                    if (input.equals(exam.getSubject()))
+                        students.get(studCount++).startExam(exam);
+                    break;
+                } // verificam pentru fiecare examen din lista de examene subiectul care se potriveste cu cel introdus de elev
+
+            } else {
+                System.out.println("Are you a student or a professor?");
             }
         }
-
     }
+
 }
+

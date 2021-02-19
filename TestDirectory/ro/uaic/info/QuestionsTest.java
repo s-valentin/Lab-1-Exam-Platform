@@ -20,11 +20,11 @@ class QuestionsTest {
         assertEquals(QuestionType.shortAnswer, testQuestion.getType());
     }
 
-    @Test
+    /*@Test
     void setNbAnswers() {
         testQuestion.setNbAnswers(3);
         assertEquals(3, testQuestion.getNbAnswers());
-    }
+    }*/
 
     @Test
     void setPoints() {
