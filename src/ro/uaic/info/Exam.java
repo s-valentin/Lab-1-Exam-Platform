@@ -1,5 +1,8 @@
 package ro.uaic.info;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Exam {
 
     private String subject;
@@ -10,10 +13,13 @@ public class Exam {
     private int totalPoints;
     protected int grade;
     private Questions[] question;
+    ArrayList<Questions> questions = new ArrayList<>();
 
-    public void setTitle(String string) { title = string; }
+    public void setTitle(String string) {
+        title = string;
+    }
 
-    public void setSubject(String string){
+    public void setSubject(String string) {
         subject = string;
     }
 
@@ -38,9 +44,11 @@ public class Exam {
         grade = number;
     }
 
-    public String getTitle() { return title; }
+    public String getTitle() {
+        return title;
+    }
 
-    public String getSubject(){
+    public String getSubject() {
         return subject;
     }
 
@@ -64,5 +72,80 @@ public class Exam {
         return grade;
     }
 
+    public void setQuestions() {
+        Scanner scanner = new Scanner(System.in);
 
+        for (int i = 0; i < getNbQuestions(); i++) {
+            Questions intrebare = new Questions();
+
+            System.out.println("Insert question:");
+            intrebare.setTitle(scanner.nextLine());
+            System.out.println("Insert question type:");
+            System.out.println("multiple choice/short answer/dropdown");
+            intrebare.setType(scanner.nextLine());
+            System.out.println("Number of points for this question:");
+            intrebare.setPoints(scanner.nextInt());
+
+            switch (intrebare.getType()) {
+                case multipleChoice: {
+                    System.out.println("Insert right answers:");
+                    System.out.println("Finish with 0");
+
+                    String input = scanner.nextLine();
+                    while (!input.equals("0")) {
+                        intrebare.setRightAnswers(input);
+                        input = scanner.nextLine();
+                    }
+
+                    System.out.println("Insert wrong answers:");
+                    System.out.println("Finish with 0");
+
+                    input = scanner.nextLine();
+                    while (!input.equals("0")) {
+                        intrebare.setWrongAnswers(input);
+                        input = scanner.nextLine();
+                    }
+
+                    intrebare.createAllAnswers();
+                    break;
+                }
+                case dropdown: {
+                    System.out.println("Insert right answer:");
+                    scanner.nextLine();
+                    String input = scanner.nextLine();
+                    intrebare.setRightAnswers(input);
+
+
+                    System.out.println("Insert wrong answers:");
+                    System.out.println("Finish with 0");
+
+                    input = scanner.nextLine();
+                    while (!input.equals("0")) {
+                        intrebare.setWrongAnswers(input);
+                        input = scanner.nextLine();
+                    }
+
+                    intrebare.createAllAnswers();
+                    break;
+                }
+                case shortAnswer: {
+                    scanner.nextLine();
+                    System.out.println("Insert right answer:");
+                    String input = scanner.nextLine();
+                    intrebare.setRightAnswers(input);
+                    break;
+                }
+                default:
+                    break;
+            }
+
+
+            /*System.out.println("test");
+            intrebare.print();
+            System.out.println(intrebare.nbRightAnswers);
+            System.out.println(intrebare.nbWrongAnswers);
+            System.out.println("test");*/
+            questions.add(intrebare);
+        }
+    }
 }
