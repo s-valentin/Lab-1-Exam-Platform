@@ -42,26 +42,26 @@
   <td class="name">Student</td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (1/ 1)
+    (0/ 1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    75%
+    0%
   </span>
   <span class="absValue">
-    (3/ 4)
+    (0/ 3)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    36.4%
+    0%
   </span>
   <span class="absValue">
-    (4/ 11)
+    (0/ 14)
   </span>
 </td>
 </tr>
@@ -74,40 +74,38 @@
 
 <div class="sourceCode"><i>1</i>&nbsp;package ro.uaic.info;
 <i>2</i>&nbsp;
-<b class="fc"><i>3</i>&nbsp;public class Student implements Users{</b>
+<b class="nc"><i>3</i>&nbsp;public class Student extends Professor{</b>
 <i>4</i>&nbsp;
-<i>5</i>&nbsp;    private String name;
-<i>6</i>&nbsp;
-<i>7</i>&nbsp;    public void startExam(Exam exam){
-<b class="nc"><i>8</i>&nbsp;        System.out.println(exam.getTitle());</b>
-<i>9</i>&nbsp;
-<b class="nc"><i>10</i>&nbsp;        System.out.println(exam.getSubject());</b>
-<i>11</i>&nbsp;
-<b class="nc"><i>12</i>&nbsp;        System.out.println(&quot;You have &quot; + exam.getTime() + &quot; minutes&quot;);</b>
-<i>13</i>&nbsp;
-<b class="nc"><i>14</i>&nbsp;        System.out.println(&quot;You have &quot; + exam.getNbQuestions() + &quot; questions&quot;);</b>
-<i>15</i>&nbsp;
-<b class="nc"><i>16</i>&nbsp;        System.out.println(&quot;You have &quot; + exam.getStartPoints() + &quot; starting points&quot;);</b>
-<i>17</i>&nbsp;
-<b class="nc"><i>18</i>&nbsp;        System.out.println(&quot;You can get &quot; + exam.getTotalPoints() + &quot; points maximum&quot;);</b>
-<b class="nc"><i>19</i>&nbsp;    }</b>
-<i>20</i>&nbsp;
-<i>21</i>&nbsp;    public void setName(String string) {
-<b class="fc"><i>22</i>&nbsp;        name = string;</b>
-<b class="fc"><i>23</i>&nbsp;    }</b>
-<i>24</i>&nbsp;
-<i>25</i>&nbsp;    public String getName() {
-<b class="fc"><i>26</i>&nbsp;        return name;</b>
-<i>27</i>&nbsp;    }
-<i>28</i>&nbsp;
-<i>29</i>&nbsp;
-<i>30</i>&nbsp;}
+<i>5</i>&nbsp;    public void chooseExam(String string) {
+<b class="nc"><i>6</i>&nbsp;        System.out.println(exams[0].getSubject());</b>
+<b class="nc"><i>7</i>&nbsp;        for(int i = 0; i &lt; counter; i++){</b>
+<b class="nc"><i>8</i>&nbsp;            if(exams[i].getSubject().equals(string)) {</b>
+<b class="nc"><i>9</i>&nbsp;                startExam(i);</b>
+<b class="nc"><i>10</i>&nbsp;                break;</b>
+<i>11</i>&nbsp;            }
+<b class="nc"><i>12</i>&nbsp;            if(i &gt; counter)</b>
+<b class="nc"><i>13</i>&nbsp;                System.out.println(&quot;You don&#39;t have that exam.&quot;);</b>
+<i>14</i>&nbsp;        }
+<i>15</i>&nbsp;    }
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    private void startExam(int index){
+<b class="nc"><i>18</i>&nbsp;        System.out.println(exams[index].getTitle());</b>
+<b class="nc"><i>19</i>&nbsp;        System.out.println(exams[index].getSubject());</b>
+<b class="nc"><i>20</i>&nbsp;        System.out.println(&quot;You have &quot; + exams[index].getTime() + &quot; minutes&quot;);</b>
+<b class="nc"><i>21</i>&nbsp;        System.out.println(&quot;You have &quot; + exams[index].getNbQuestions() + &quot;questions&quot;);</b>
+<b class="nc"><i>22</i>&nbsp;        System.out.println(&quot;You have &quot; + exams[index].getStartPoints() + &quot;starting points&quot;);</b>
+<b class="nc"><i>23</i>&nbsp;        System.out.println(&quot;You can get &quot; + exams[index].getTotalPoints() + &quot;points maximum&quot;);</b>
+<i>24</i>&nbsp;    }
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2021-02-19 17:42</div>
+    <div style="float:right;">generated on 2021-02-19 17:43</div>
 </div>
 </body>
 </html>

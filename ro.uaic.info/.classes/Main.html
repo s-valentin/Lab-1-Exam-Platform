@@ -74,93 +74,90 @@
 
 <div class="sourceCode"><i>1</i>&nbsp;package ro.uaic.info;
 <i>2</i>&nbsp;
-<i>3</i>&nbsp;import java.util.ArrayList;
-<i>4</i>&nbsp;import java.util.Scanner;
-<i>5</i>&nbsp;
-<b class="nc"><i>6</i>&nbsp;public class Main {</b>
-<i>7</i>&nbsp;
-<i>8</i>&nbsp;    public static void main(String[] args) {
-<i>9</i>&nbsp;
+<i>3</i>&nbsp;import java.util.Scanner;
+<i>4</i>&nbsp;
+<b class="nc"><i>5</i>&nbsp;public class Main {</b>
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;    public static void main(String[] args) {
+<i>8</i>&nbsp;
+<b class="nc"><i>9</i>&nbsp;        Questions question = new Questions();</b>
 <i>10</i>&nbsp;
-<b class="nc"><i>11</i>&nbsp;        Scanner scanner = new Scanner(System.in);</b>
-<b class="nc"><i>12</i>&nbsp;        ArrayList&lt;Exam&gt; exams = new ArrayList&lt;&gt;();</b>
-<i>13</i>&nbsp;
-<i>14</i>&nbsp;        String input;
-<i>15</i>&nbsp;
-<b class="nc"><i>16</i>&nbsp;        int profCount = 0;</b>
-<b class="nc"><i>17</i>&nbsp;        int studCount = 0;</b>
-<i>18</i>&nbsp;
-<b class="nc"><i>19</i>&nbsp;        ArrayList&lt;Professor&gt; profs = new ArrayList&lt;&gt;();</b>
-<b class="nc"><i>20</i>&nbsp;        ArrayList&lt;Student&gt; students = new ArrayList&lt;&gt;();</b>
-<i>21</i>&nbsp;
-<i>22</i>&nbsp;        while (true) { // bucla infinita, nu avem de ce sa ne oprim.
-<b class="nc"><i>23</i>&nbsp;            System.out.println(&quot;State your identity:&quot;);</b>
-<b class="nc"><i>24</i>&nbsp;            input = scanner.next();</b>
-<b class="nc"><i>25</i>&nbsp;            if (input.equals(&quot;Professor&quot;)) {</b>
-<b class="nc"><i>26</i>&nbsp;                profs.add(new Professor()); // am creat un profesor</b>
-<i>27</i>&nbsp;
-<b class="nc"><i>28</i>&nbsp;                System.out.println(&quot;State your name:&quot;);</b>
-<b class="nc"><i>29</i>&nbsp;                input = scanner.next();</b>
-<b class="nc"><i>30</i>&nbsp;                profs.get(profCount).setName(input); // am adaugat numele profesorului</b>
-<i>31</i>&nbsp;
-<b class="nc"><i>32</i>&nbsp;                System.out.println(&quot;What do you want to do?&quot;); // create / remove</b>
-<b class="nc"><i>33</i>&nbsp;                input = scanner.next();</b>
+<b class="nc"><i>11</i>&nbsp;        question.setTitle(&quot;Alabama&quot;);</b>
+<b class="nc"><i>12</i>&nbsp;        question.setType(QuestionType.dropdown);</b>
+<b class="nc"><i>13</i>&nbsp;        question.setPoints(10);</b>
+<i>14</i>&nbsp;
+<b class="nc"><i>15</i>&nbsp;        System.out.println(question.getTitle());</b>
+<i>16</i>&nbsp;
+<b class="nc"><i>17</i>&nbsp;        String raspuns = &quot;&quot;;</b>
+<b class="nc"><i>18</i>&nbsp;        System.out.println(&quot;Introduceti raspunsurile corecte \nLa final puneti 0&quot;);</b>
+<b class="nc"><i>19</i>&nbsp;        Scanner scanner = new Scanner(System.in);</b>
+<b class="nc"><i>20</i>&nbsp;        raspuns = scanner.next();</b>
+<b class="nc"><i>21</i>&nbsp;        while(!raspuns.equals(&quot;0&quot;))</b>
+<i>22</i>&nbsp;        {
+<b class="nc"><i>23</i>&nbsp;            question.setRightAnswers(raspuns);</b>
+<b class="nc"><i>24</i>&nbsp;            raspuns = scanner.next();</b>
+<i>25</i>&nbsp;        }
+<i>26</i>&nbsp;
+<b class="nc"><i>27</i>&nbsp;        System.out.println(&quot;Introduceti raspunsurile corecte \nLa final puneti 0&quot;);</b>
+<b class="nc"><i>28</i>&nbsp;        raspuns = scanner.next();</b>
+<b class="nc"><i>29</i>&nbsp;        while(!raspuns.equals(&quot;0&quot;))</b>
+<i>30</i>&nbsp;        {
+<b class="nc"><i>31</i>&nbsp;            question.setWrongAnswers(raspuns);</b>
+<b class="nc"><i>32</i>&nbsp;            raspuns = scanner.next();</b>
+<i>33</i>&nbsp;        }
 <i>34</i>&nbsp;
-<b class="nc"><i>35</i>&nbsp;                if (input.equals(&quot;create&quot;)) { // ramura create</b>
-<b class="nc"><i>36</i>&nbsp;                    exams.add(profs.get(profCount++).createExam()); //profesorul creeaza un examen</b>
-<b class="nc"><i>37</i>&nbsp;                } else if (input.equals(&quot;delete&quot;)) { // ramura delete</b>
-<b class="nc"><i>38</i>&nbsp;                    for (Exam exam : exams) {</b>
-<b class="nc"><i>39</i>&nbsp;                        System.out.print(exam.getSubject() + &quot; &quot;);</b>
-<b class="nc"><i>40</i>&nbsp;                    } // printam lista de examene pt ca profesorul sa aleaga ce obiect sterge</b>
-<i>41</i>&nbsp;
-<b class="nc"><i>42</i>&nbsp;                    System.out.println(&quot;\nInsert the exam subject from the above list.&quot;);</b>
-<b class="nc"><i>43</i>&nbsp;                    input = scanner.next();</b>
-<i>44</i>&nbsp;
-<b class="nc"><i>45</i>&nbsp;                    for (Exam exam : exams) {</b>
-<i>46</i>&nbsp;                        {
-<b class="nc"><i>47</i>&nbsp;                            if (input.equals(exam.getSubject()))</b>
-<b class="nc"><i>48</i>&nbsp;                                exams.remove(exam); // a selectat din lista de examene obiectul pe care acum il stergem</b>
-<i>49</i>&nbsp;                            break;
-<i>50</i>&nbsp;                        }
-<i>51</i>&nbsp;                    }
-<i>52</i>&nbsp;
-<i>53</i>&nbsp;                }
-<b class="nc"><i>54</i>&nbsp;            } else if (input.equals(&quot;Student&quot;)) {</b>
-<b class="nc"><i>55</i>&nbsp;                students.add(new Student()); // am creat un student</b>
+<b class="nc"><i>35</i>&nbsp;        question.createAllAnswers();</b>
+<b class="nc"><i>36</i>&nbsp;        System.out.println(question.nbAllAnswers);</b>
+<i>37</i>&nbsp;
+<b class="nc"><i>38</i>&nbsp;        question.print();</b>
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;        /*
+<i>41</i>&nbsp;        Scanner scanner = new Scanner(System.in);
+<i>42</i>&nbsp;        String test = scanner.next();
+<i>43</i>&nbsp;        System.out.println(test);
+<i>44</i>&nbsp;        test = scanner.next();
+<i>45</i>&nbsp;        System.out.println(test);
+<i>46</i>&nbsp;        test = scanner.next();
+<i>47</i>&nbsp;        System.out.println(test);
+<i>48</i>&nbsp;        */
+<i>49</i>&nbsp;        String input;
+<i>50</i>&nbsp;
+<b class="nc"><i>51</i>&nbsp;        int profCount = 0;</b>
+<b class="nc"><i>52</i>&nbsp;        int studCount = 0;</b>
+<i>53</i>&nbsp;
+<b class="nc"><i>54</i>&nbsp;        Professor[] profs = new Professor[10];</b>
+<b class="nc"><i>55</i>&nbsp;        Student[] students = new Student[10];</b>
 <i>56</i>&nbsp;
-<b class="nc"><i>57</i>&nbsp;                System.out.println(&quot;State your name: &quot;);</b>
-<b class="nc"><i>58</i>&nbsp;                input = scanner.next();</b>
-<b class="nc"><i>59</i>&nbsp;                students.get(studCount).setName(input); // am adaugat numele studentului</b>
-<i>60</i>&nbsp;
-<b class="nc"><i>61</i>&nbsp;                System.out.println(&quot;Exam List:&quot;);</b>
-<i>62</i>&nbsp;
-<b class="nc"><i>63</i>&nbsp;                for (Exam exam : exams) {</b>
-<b class="nc"><i>64</i>&nbsp;                    System.out.print(exam.getSubject() + &quot; &quot;);</b>
-<b class="nc"><i>65</i>&nbsp;                } // printam lista de examene pt ca studentul sa aleaga unul.</b>
-<i>66</i>&nbsp;
-<b class="nc"><i>67</i>&nbsp;                System.out.println(&quot;\nInsert the exam subject from the above list.&quot;);</b>
-<b class="nc"><i>68</i>&nbsp;                input = scanner.next(); // studentul alege un examen din lista de mai sus</b>
-<i>69</i>&nbsp;
-<b class="nc"><i>70</i>&nbsp;                for (Exam exam : exams) {</b>
-<b class="nc"><i>71</i>&nbsp;                    if (input.equals(exam.getSubject()))</b>
-<b class="nc"><i>72</i>&nbsp;                        students.get(studCount++).startExam(exam);</b>
-<i>73</i>&nbsp;                    break;
-<i>74</i>&nbsp;                } // verificam pentru fiecare examen din lista de examene subiectul care se potriveste cu cel introdus de elev
-<i>75</i>&nbsp;
-<i>76</i>&nbsp;            } else {
-<b class="nc"><i>77</i>&nbsp;                System.out.println(&quot;Are you a student or a professor?&quot;);</b>
-<i>78</i>&nbsp;            }
-<i>79</i>&nbsp;        }
-<i>80</i>&nbsp;    }
-<i>81</i>&nbsp;
-<i>82</i>&nbsp;}
-<i>83</i>&nbsp;
+<i>57</i>&nbsp;        while (true) {
+<b class="nc"><i>58</i>&nbsp;            System.out.println(&quot;State your identity:&quot;);</b>
+<b class="nc"><i>59</i>&nbsp;            input = scanner.next();</b>
+<b class="nc"><i>60</i>&nbsp;            for (int i = 0; i &lt; 2; i++) {</b>
+<b class="nc"><i>61</i>&nbsp;                if (input.equals(&quot;Professor&quot;)) {</b>
+<b class="nc"><i>62</i>&nbsp;                    profs[profCount] = new Professor();</b>
+<b class="nc"><i>63</i>&nbsp;                    profs[profCount++].createExam();</b>
+<b class="nc"><i>64</i>&nbsp;                    break;</b>
+<b class="nc"><i>65</i>&nbsp;                } else if (input.equals(&quot;Student&quot;)) {</b>
+<b class="nc"><i>66</i>&nbsp;                    System.out.println(input);</b>
+<b class="nc"><i>67</i>&nbsp;                    students[studCount] = new Student();</b>
+<b class="nc"><i>68</i>&nbsp;                    students[studCount++].chooseExam(&quot;OOP&quot;);</b>
+<b class="nc"><i>69</i>&nbsp;                    break;</b>
+<b class="nc"><i>70</i>&nbsp;                } else if (i == 0) {</b>
+<b class="nc"><i>71</i>&nbsp;                    System.out.println(&quot;Are you a student or a professor?&quot;);</b>
+<b class="nc"><i>72</i>&nbsp;                    input = scanner.next();</b>
+<b class="nc"><i>73</i>&nbsp;                } else if (i == 1) {</b>
+<b class="nc"><i>74</i>&nbsp;                    System.out.println(&quot;Bye bye!&quot;);</b>
+<i>75</i>&nbsp;                }
+<i>76</i>&nbsp;            }
+<i>77</i>&nbsp;        }
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;    }
+<i>80</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2021-02-19 17:42</div>
+    <div style="float:right;">generated on 2021-02-19 17:43</div>
 </div>
 </body>
 </html>
