@@ -28,7 +28,7 @@ public class Main {
                 input = scanner.next();
                 profs.get(profCount).setName(input); // am adaugat numele profesorului
 
-                System.out.println("What do you want to do?"); // create / remove
+                System.out.println("What do you want to do?\ncreate / delete"); // create / DELETE
                 input = scanner.next();
 
                 if (input.equals("create")) { // ramura create
@@ -68,7 +68,12 @@ public class Main {
 
                 for (Exam exam : exams) {
                     if (input.equals(exam.getSubject()))
-                        students.get(studCount++).startExam(exam);
+                    {
+                        long startTime = System.currentTimeMillis();
+                        while((System.currentTimeMillis() - startTime) < exam.getTime() * (long)60_000)
+                            students.get(studCount++).startExam(exam);
+
+                    }
                     break;
                 } // verificam pentru fiecare examen din lista de examene subiectul care se potriveste cu cel introdus de elev
 

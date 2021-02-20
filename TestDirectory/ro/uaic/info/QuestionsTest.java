@@ -17,11 +17,11 @@ class QuestionsTest {
         assertEquals("Question123", testQuestion.getTitle());
     }
 
-    @Test
+   /* @Test
     void setType() {
         testQuestion.setType(QuestionType.shortAnswer);
         assertEquals(QuestionType.shortAnswer, testQuestion.getType());
-    }
+    }*/
 
     /*@Test
     void setNbAnswers() {
@@ -67,8 +67,8 @@ class QuestionsTest {
         //System.out.println(testQuestion.nbAllAnswers + 'a');
         //System.out.println(testQuestion.nbAllAnswers);
         assertEquals(0, testQuestion.validateInputMC("acfg"));
-        assertEquals(0,testQuestion.validateInputMC("aabc"));
-        assertEquals(1, testQuestion.validateInputMC("acf"));
+        assertEquals(0, testQuestion.validateInputMC("aabc"));
+        assertEquals(1, testQuestion.validateInputMC("ac"));
     }
 
     /*@Test

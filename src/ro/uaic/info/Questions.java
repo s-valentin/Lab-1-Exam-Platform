@@ -33,8 +33,13 @@ public class Questions extends Exam implements Useful {
         return type;
     }
 
-    public void setType(QuestionType type) {
-        this.type = type;
+    public void setType(String type) {
+        if(type.equals("multiple choice"))
+            this.type = QuestionType.multipleChoice;
+        if(type.equals("short answer"))
+            this.type = QuestionType.shortAnswer;
+        if(type.equals("dropdown"))
+            this.type = QuestionType.dropdown;
     }
 
     public int getPoints() {
@@ -88,6 +93,11 @@ public class Questions extends Exam implements Useful {
     amesteca lista cu toate raspunsurile (corecte + gresite)
      */
     public void createAllAnswers() {
+
+        //weird fix
+        nbRightAnswers--;
+        rightAnswers.remove(0);
+
         nbAllAnswers = nbWrongAnswers + nbRightAnswers;
         allAnswers.addAll(rightAnswers);
         allAnswers.addAll(wrongAnswers);
@@ -148,7 +158,8 @@ public class Questions extends Exam implements Useful {
         return ok;
     }
 
-    public void checkInputAnswer(String input) {
+    public float checkInputAnswer(String input) {
+        float aux;
         switch (type) {
             case multipleChoice: {
                 if (validateInputMC(input) == 0)
@@ -165,12 +176,12 @@ public class Questions extends Exam implements Useful {
                         else
                             wrong++;
                     }
-                    System.out.println("-------");
+                    /*System.out.println("-------");
                     System.out.println(correct);
-                    System.out.println(wrong);
+                    System.out.println(wrong);*/
                     float pointsPerAnswer = points / (float) nbRightAnswers;
                     pointsTaken = (correct * pointsPerAnswer) - (wrong * pointsPerAnswer / 2);
-                    System.out.println("punctaj luat " + pointsTaken);
+                    //System.out.println("punctaj luat " + pointsTaken);
                 }
                 break;
             }
@@ -179,7 +190,7 @@ public class Questions extends Exam implements Useful {
                     pointsTaken = points;
                 else
                     pointsTaken = 0;
-                System.out.println("punctaj luat " + pointsTaken);
+                //System.out.println("punctaj luat " + pointsTaken);
                 break;
             }
             case dropdown: {
@@ -189,13 +200,15 @@ public class Questions extends Exam implements Useful {
 
                 else
                     pointsTaken = 0;
-                System.out.println("punctaj luat " + pointsTaken);
+                //System.out.println("punctaj luat " + pointsTaken);
                 break;
             }
 
             default:
                 break;
         }
+        aux = pointsTaken;
+        return aux;
     }
 
 
@@ -208,8 +221,15 @@ public class Questions extends Exam implements Useful {
 
     public void printRightAnswers()
     {
-        for(int i = 0; i < nbAllAnswers; i++)
+        for(int i = 0; i < nbRightAnswers; i++)
             System.out.println(rightAnswers.get(i));
+        System.out.println("-----------------------");
+    }
+
+    public void printWrongAnswers()
+    {
+        //for(int i = 0; i < nbWrongAnswers; i++)
+            System.out.println(wrongAnswers/*.get(i)*/);
     }
 }
 
